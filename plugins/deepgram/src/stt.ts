@@ -23,6 +23,7 @@ export interface STTOptions {
   numChannels: number;
   keywords: [string, number][];
   profanityFilter: boolean;
+  utterance_end_ms: number;
 }
 
 const defaultSTTOptions: STTOptions = {
@@ -40,6 +41,7 @@ const defaultSTTOptions: STTOptions = {
   numChannels: 1,
   keywords: [],
   profanityFilter: false,
+  utterance_end_ms: 0
 };
 
 export class STT extends stt.STT {
@@ -128,6 +130,7 @@ export class SpeechStream extends stt.SpeechStream {
         keywords: this.#opts.keywords.map((x) => x.join(':')),
         profanity_filter: this.#opts.profanityFilter,
         language: this.#opts.language,
+        utterance_end_ms: this.#opts.utterance_end_ms
       };
       Object.entries(params).forEach(([k, v]) => {
         if (v !== undefined) {
